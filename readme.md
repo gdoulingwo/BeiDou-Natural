@@ -1,4 +1,4 @@
-##5.04更新
+## 5.04更新  
 创建laravel5.4工程，整合admin页面。可以通过localhost:8000/admin/ 查看
 
 ## License
