@@ -30,6 +30,8 @@
         </ul>
         <ul role="tablist">
             <li><a href="#disaster-log-info" role="tab"><i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i></a>
+            <li><a href="#disaster-plan-info" role="tab"><i class="fa fa-book fa-fw" aria-hidden="true"></i></a>
+            <li><a href="#early-waring-info" role="tab"><i class="fa fa-shield fa-fw" aria-hidden="true"></i></a>
             </li>
             <li><a href="#whole-history-log-info" role="tab"><i class="fa fa-calculator fa-fw"
                                                                 aria-hidden="true"></i></a></li>
@@ -158,11 +160,8 @@
                                    value="">
                         </div>
                         <div id="treeview-checkable-disaster-list"></div>
-                        <!--<div id="checkable-output"></div>-->
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -346,6 +345,40 @@
             </div>
         </div>
 
+        <div class="sidebar-pane" id="disaster-plan-info">
+            <h1 class="sidebar-header"><label>决策信息</label><span class="sidebar-close"><i
+                            class="fa fa-caret-left"></i></span></h1>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 id="plan-title">灾害处理预案</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p id="plan-content">
+                            暂无相关信息,请选择受灾区
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-pane" id="early-waring-info">
+            <h1 class="sidebar-header"><label>预警信息</label><span class="sidebar-close"><i
+                            class="fa fa-caret-left"></i></span></h1>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 id="early-warning-title">自然灾害预警信息</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p id="early-warning-content">
+                            暂无相关信息,请选择预警区
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="sidebar-pane" id="whole-history-log-info">
             <h1 class="sidebar-header"><label id="label-history-range">历史</label><label>灾害总量统计</label>
                 <span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -389,16 +422,6 @@
                                 <td>0</td>
                                 <td>0</td>
                             </tr>
-                            <!--<tr style="background-color: #d6e9c6; font-weight:bold;">
-                                <th>最高洪涝等级</th>
-                                <th>最高冻害等级</th>
-                                <th>最高泥石流等级</th>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>-->
                             <tr style="background-color: #d6e9c6; font-weight:bold;">
                                 <th>决堤数量</th>
                                 <th>决堤长度（米）</th>
@@ -411,7 +434,6 @@
                             </tr>
                             <tr style="background-color: #d6e9c6; font-weight:bold;">
                                 <th>滑坡体积<p>立方米</p></th>
-                                <!--<th>最高台风级别</th>-->
                                 <th>最大雨量</th>
                                 <th>最低温度(℃)</th>
                             </tr>
@@ -469,32 +491,39 @@
 <script async src="./js/ol-geo-animation.js"></script>
 <script async src="./js/auto-load-all-layers.js"></script>
 <script async>
+    var earlyWarningData = [];
     $.ajax({
-        url: "http://localhost:8000/api",
+        url: "/earlyWarning",
         type: "get",
         data: null,
         success: function (data) {
-            data = JSON.parse(data);
-            for (var i in data) {
+            earlyWarningData = JSON.parse(data);
+            for (var i in earlyWarningData) {
                 var anchor = new ol.Feature({
-                    geometry: new ol.geom.Point(data[i].center_features)
+                    geometry: new ol.geom.Point(earlyWarningData[i].coordinate)
                 });
                 anchor.setStyle(new ol.style.Style({
                     image: new ol.style.Icon({
-                        src: './img/' + data[i].level + '.png',
+                        src: './img/' + earlyWarningData[i].level + '.png',
                         scale: map.getView().getZoom() / 12
                     })
                 }));
-                anchor.on('click', function (p1) {
-                    //todo
+
+                anchor.content = earlyWarningData[i].content;
+                anchor.title = earlyWarningData[i].title;
+
+                anchor.on('click', function (e) {
+                    open_sidebar_id(sidebar, "early-waring-info");
+                    $('#early-warning-title').html(this.title);
+                    $('#early-warning-content').html(this.content);
                 });
+
                 alarm_layer.getSource().addFeature(anchor);
             }
         }
     });
-    map.on('click', function(event){
-        map.forEachFeatureAtPixel(event.pixel, function(feature){
-            // 为移动到的feature发送自定义的mousemove消息
+    map.on('click', function (event) {
+        map.forEachFeatureAtPixel(event.pixel, function (feature) {
             feature.dispatchEvent({type: 'click', event: event});
         });
     });

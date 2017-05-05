@@ -6,6 +6,8 @@
 
 Route::get('/log', 'FrontendController@log');
 
-Route::get('/api', function () {
-    return view('frontend.api');
+Route::get('/earlyWarning', function () {
+    return view('frontend.earlyWarningApi');
 });
+
+Route::get('/planContent', 'admin\ContingencyPlanController@getPlan');

@@ -40,10 +40,17 @@
 							</div>
 						</div>
 
-            <div class="form-group">
+            			<div class="form-group">
 							<label class="col-md-4 control-label">房屋倒塌数</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="building_collapse">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">应急方案内容</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="content">
 							</div>
 						</div>
 
@@ -53,6 +60,7 @@
 							</div>
 						</div>
 					</form>
+
 
 				</div>
 			</div>

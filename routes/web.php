@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 Route::get('/admin/contingencyPlan', 'admin\ContingencyPlanController@index');
 Route::post('/admin/contingencyPlan', 'admin\ContingencyPlanController@store');
+
