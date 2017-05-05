@@ -1,14 +1,14 @@
 [
 {
 "level": 1,
-"center_features": [
+"coordinate": [
 113.83879722333332,
 22.918994443333332
 ]
 },
 {
 "level": 2,
-"center_features": [
+"coordinate": [
 114.83879722333332,
 23.918994443333332
 ]
