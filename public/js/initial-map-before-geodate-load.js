@@ -1,4 +1,3 @@
-
 var mousePositionControl = new ol.control.MousePosition({
     coordinateFormat: ol.coordinate.createStringXY(3),
     projection: 'EPSG:4326',
@@ -14,13 +13,17 @@ var osmTile_layer = new ol.layer.Tile({
     source: new ol.source.OSM()
 });
 
+var alarm_layer = new ol.layer.Vector({
+    source: new ol.source.Vector()
+});
+
 
 /**
  * Create an overlay to anchor the popup to the map.
  */
 var overlay_popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
     element: container_popup,
-    positioning:'bottom-left',
+    positioning: 'bottom-left',
     autoPan: true,
     autoPanAnimation: {
         duration: 250
@@ -33,7 +36,7 @@ var line_popup = null;
 var sidebar = $('#sidebar').sidebar();
 open_sidebar_id(sidebar, "map-view");
 
-var overlay_close = function() {
+var overlay_close = function () {
     overlay_popup.setPosition(undefined);
     closer_popup.blur();
     point_popup = null;
@@ -54,7 +57,7 @@ var map = new ol.Map({
             collapsible: false
         })
     }).extend([mousePositionControl]),
-    layers: [ osmTile_layer ], //,
+    layers: [osmTile_layer, alarm_layer], //,
     renderer: common.getRendererFromQueryString(),
     overlays: [overlay_popup],
     target: 'map',

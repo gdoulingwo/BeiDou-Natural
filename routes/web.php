@@ -10,12 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-View::addExtension('html', 'php');
+require __DIR__ . "/frontend.php";
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/', 'AdminController@index');
-Route::get('/admin/contingencyPlan', 'Admin\ContingencyPlanController@index');
-Route::post('/admin/contingencyPlan', 'Admin\ContingencyPlanController@store');
+Route::get('/admin/contingencyPlan', 'admin\ContingencyPlanController@index');
+Route::post('/admin/contingencyPlan', 'admin\ContingencyPlanController@store');
