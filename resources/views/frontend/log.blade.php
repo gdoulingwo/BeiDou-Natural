@@ -493,11 +493,11 @@
 <script async>
     var earlyWarningData = [];
     $.ajax({
-        url: "/earlyWarning",
+        url: "/api/warning",
         type: "get",
         data: null,
         success: function (data) {
-            earlyWarningData = JSON.parse(data);
+            earlyWarningData = data;
             for (var i in earlyWarningData) {
                 var anchor = new ol.Feature({
                     geometry: new ol.geom.Point(earlyWarningData[i].coordinate)

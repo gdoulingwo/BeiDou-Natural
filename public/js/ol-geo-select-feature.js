@@ -101,7 +101,7 @@ var displayFeatureBeidouLog = function (feature, coordinate) {
     row11_tab2.cells[2].innerHTML = LowestTemperature;
     //发送获取应急响应预案
     $.ajax({
-        url: '/planContent',
+        url: '/api/plan',
         type: 'get',
         data: {
             affected_population: AffectedPopulation,

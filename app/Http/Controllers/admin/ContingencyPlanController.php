@@ -28,11 +28,11 @@ class ContingencyPlanController extends Controller
         $dead_population = $request->dead_population;
         //$building_collapse = $request->building_collapse;
         $array = array();
-        $plans=ContingencyPlan::orderBy('dead_population')->get();
-        foreach ($plans as $plan){
-            if($dead_population>$plan->dead_population){
-                $array['name']=$plan->name;
-                $array['content']=$plan->content;
+        $plans = ContingencyPlan::orderBy('dead_population')->get();
+        foreach ($plans as $plan) {
+            if ($dead_population > $plan->dead_population) {
+                $array['name'] = $plan->name;
+                $array['content'] = $plan->content;
                 break;
             }
         }
