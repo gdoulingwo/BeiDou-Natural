@@ -1,8 +1,13 @@
+## 5.06更新
+增加 添加预警方案功能 /admin/warning  
+增加 预警信息api     /api/warning  
+增加 决策api        /api/plan
+
 ## 5.05更新  
-增加 添加预警方案功能，可以通过localhost:8000/admin/contingencyPlan 查看
+增加 添加决策方案功能，可以通过/admin/plan 查看
 
 ## 5.04更新  
-创建laravel5.4工程，整合admin页面。可以通过localhost:8000/admin/ 查看
+创建laravel5.4工程，整合log页面。可以通过/log/ 查看
 
 ## License
 
