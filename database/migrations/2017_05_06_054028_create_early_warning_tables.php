@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCplansTables extends Migration
+class CreateEarlyWarningTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class AddCplansTables extends Migration
      */
     public function up()
     {
-        Schema::table('contingency_plans', function (Blueprint $table) {
-            $table->Text('content');
+        Schema::create('early_warnings', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('level');
+            $table->String('title');
+            $table->String('content');
+            $table->String('key');
+            $table->integer('value');
+            $table->timestamps();
         });
     }
 

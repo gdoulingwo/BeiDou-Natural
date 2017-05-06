@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/contingencyPlan', 'admin\ContingencyPlanController@index');
-Route::post('/admin/contingencyPlan', 'admin\ContingencyPlanController@store');
+Route::get('/admin/plan', 'admin\ContingencyPlanController@index');
+Route::post('/admin/plan', 'admin\ContingencyPlanController@store');
 
+Route::get('/admin/warning', 'admin\EarlyWarningController@index');
+Route::post('/admin/warning', 'admin\EarlyWarningController@store');

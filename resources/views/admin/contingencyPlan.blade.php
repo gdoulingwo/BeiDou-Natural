@@ -16,7 +16,7 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/admin/contingencyPlan">
+					<form class="form-horizontal" role="form" method="POST" action="/admin/plan">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
@@ -50,7 +50,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">应急方案内容</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="content">
+								<textarea type="text" class="form-control" name="content"></textarea>
 							</div>
 						</div>
 
