@@ -56,6 +56,6 @@ class EarlyWarningController extends Controller
             }
         }
 
-        return response()->json($array);    //转换成json，发送
+        return response(json_encode($array), 200, ["Content-type" => "application/json"]);    //转换成json，发送
     }
 }
